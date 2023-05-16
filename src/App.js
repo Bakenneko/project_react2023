@@ -1,25 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
-
+import {useEffect, useState} from "react";
+import axios from "axios";
+import MovieCard from "./componets/MovieCard";
 function App() {
-  return (
+
+    const API_URL = "https://api.themoviedb.org/3/"
+    const [movies,setMovies] = useState([])
+    const fetchMovies = async () => {
+        const {data: {results}} = await axios.get(`${API_URL}//discover/movie`,{
+            params: {
+                api_key: process.env.REACT_APP_API
+                }
+            })
+            setMovies(results)
+        }
+
+    useEffect(() => {
+        fetchMovies()
+    },[])
+
+    const renderMovies = () => (
+        movies.map(movie => (
+            <MovieCard
+                key={movie.id}
+                movie={movie}
+            />
+        ))
+    )
+
+return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Hello youtube</h1>
+        <div className="container">
+            {renderMovies()}
+        </div>
     </div>
-  );
+   );
 }
 
 export default App;
