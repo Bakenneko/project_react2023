@@ -1,13 +1,12 @@
 .container {
     max-width: 1000px;
-    margin-left: auto;
     margin-right: auto;
-
+    margin-left: auto;
     display: grid;
-    gap: 15px;
-    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.movie-cover{
-    with: 100%;
+.movie-cover {
+    width: 100%;
 }
